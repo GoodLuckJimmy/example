@@ -1,0 +1,109 @@
+server.port: 5000
+
+springdoc:
+  packages-to-scan: com.example.srprs
+  paths-to-match: /**
+  default-produces-media-type: application/json
+  swagger-ui:
+    tags-sorter: alpha
+
+spring:
+  thymeleaf.cache: false
+
+
+login.default-password: Sw8!D74Me+fz!+vU
+
+logging:
+  pattern:
+    console: "[%d{yyyy-MM-dd HH:mm:ss}][%-5level][%-50logger{50}:%3line]: %msg%n"
+
+#local
+---
+
+spring:
+  config.activate.on-profile: local
+
+  jpa:
+    properties.hibernate.format_sql: false
+    show-sql: false
+    hibernate.ddl-auto: update
+
+  datasource:
+    url: jdbc:mysql://
+    username: 
+    password: 
+    hikari:
+      maximum-pool-size: 2
+
+
+logging.level:
+  com.example.srprs: debug
+  org.springframework: info
+
+
+#dev
+---
+spring:
+  config.activate.on-profile: dev
+
+  jpa:
+    properties.hibernate.format_sql: false
+    show-sql: false
+    hibernate.ddl-auto: update
+
+  datasource:
+    url: jdbc:mysql://mysql-for-prod1-instance-1.c2xelxvbblla.ap-northeast-2.rds.amazonaws.com:3306/srprs_dev?useSSL=false
+    username: bpdev
+    password: y'p:Bh9buvR6TZ!'
+    hikari:
+      maximum-pool-size: 2
+
+
+logging.level:
+  com.example.srprs: debug
+  org.springframework: info
+  com.inicis: error
+
+#stage
+---
+spring:
+  config.activate.on-profile: stage
+
+  jpa:
+    properties.hibernate.format_sql: false
+    show-sql: false
+    hibernate.ddl-auto: update
+
+  datasource:
+    url: jdbc:mysql://
+    username: srprs_user
+    password: bsrprsp
+    hikari:
+      maximum-pool-size: 2
+
+logging.level:
+  com.example.srprs: info
+  org.springframework: info
+
+#prod
+---
+
+spring:
+  config.activate.on-profile: prod
+
+  jpa:
+    properties.hibernate.format_sql: false
+    show-sql: false
+    hibernate.ddl-auto: update
+
+  datasource:
+    url: jdbc:mysql://
+    username: 
+    password: 
+    hikari:
+      maximum-pool-size:6
+
+
+logging.level:
+  com.example.srprs: debug
+  com.inicis: error

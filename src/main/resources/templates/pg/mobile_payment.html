@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="ko" xmlns:th="http://www/thymeleaf.org">
+
+<head>
+  <title>INIpay Mobile WEB example</title>
+  <meta http-equiv="Content-Type" content="text/html; charset=euc-kr"/>
+
+  <script language="javascript">
+
+    function on_pay() {
+      myform = document.mobileweb;
+      myform.action = "https://mobile.inicis.com/smart/payment/";
+      myform.target = "_self";
+      myform.submit();
+    }
+  </script>
+</head>
+
+<body>
+
+<!-- 인코딩 euc-kr 필수 -->
+<form name="mobileweb" method="post" accept-charset="euc-kr">
+
+
+  <!--*************************필수 세팅 부분************************************-->
+
+  <!-- 리턴받는 가맹점 URL 세팅 -->
+  P_NEXT_URL: <input type="hidden" name="P_NEXT_URL" value="http://10.120.120.65:5000/payments/inicis/certification/mobile"><br>
+
+
+  <!-- 지불수단 선택 (신용카드,계좌이체,가상계좌,휴대폰) -->
+  P_INI_PAYMENT: <input type="text" name="P_INI_PAYMENT" value="CARD"><br>
+
+
+  <!-- 복합/옵션 파라미터 -->
+<!--  <input type="text" name="P_RESERVED" value="twotrs_isp=Y&block_isp=Y&twotrs_isp_noti=N">-->
+
+
+  mid: <input type="text" name="P_MID" th:value="${mid}"><br>
+  oid: <input type="text" name="P_OID" th:value="${oid}"><br>
+  goods: <input type="text" name="P_GOODS" value="test goods"><br>
+  price: <input type="text" name="P_AMT" th:value="${price}"><br>
+  name: <input type="text" name="P_UNAME" value="hong gildong"><br>
+  <input type="hidden" name="P_NOTI" th:value="${redirectUrl}"><br>
+
+
+  <!--*************************선택 필수 세팅 부분************************************-->
+
+  <!-- 가상계좌 입금 노티 사용시 필수 -->
+  <input type="hidden" name="P_NOTI_URL" value=""><br>
+
+
+  <!-- 휴대폰결제 필수 [1:컨텐츠, 2:실물] -->
+  <input type="hidden" name="P_HPP_METHOD" value="1"><br>
+
+
+
+  <input type="button" name="pay" value="결제" onclick="on_pay()" >
+
+
+</form>
+
+</body>
+</html>

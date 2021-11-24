@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="ko" xmlns:th="http://www/thymeleaf.org">
+
+<head>
+  <title>Pg test</title>
+  <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+  <script language="javascript" type="text/javascript" src="https://stdpay.inicis.com/stdjs/INIStdPay.js" charset="UTF-8"></script>
+</head>
+
+<body>
+
+<form id="SendPayForm_id" name="" method="POST" >
+
+  <input type="text"    name="goodname" value="테스트" >
+  <input type="text"    name="buyername" value="홍길동" >
+  <input type="text"    name="buyertel" value="010-1234-5678" >
+  <input type="text"    name="buyeremail" th:value="${email}" >
+  <input type="text"    name="price" th:value="${price}" >
+  <input type="hidden"  name="mid" th:value="${mid}">
+  <input type="hidden"  name="gopaymethod" value="Card" >
+  <input type="hidden"  name="mKey" th:value="${mKey}" >
+  <input type="hidden"  name="signature" th:value="${signature}" >
+  <input type="hidden"  name="oid" th:value="${oid}" >
+  <input type="hidden"  name="timestamp" th:value="${timestamp}" >
+  <input type="hidden"  name="version" value="1.0" >
+  <input type="hidden"  name="currency" value="WON" >
+  <input type="hidden"  name="returnUrl" value="http://localhost:5000/payments/inicis/certification/web" >
+  <input type="hidden"  name="closeUrl" value="http://localhost:5000/payments/inicis1_rsponse" >
+  <input type="hidden"  name="merchantData" th:value="${redirectUrl}" >
+
+<!--  String siteDomain = "http://127.0.0.1:8080/INIpayStdSample"; //가맹점 도메인 입력-->
+<!--  // 페이지 URL에서 고정된 부분을 적는다.-->
+<!--  // Ex) returnURL이 http://localhost:8080INIpayStdSample/INIStdPayReturn.jsp 라면-->
+<!--  // http://localhost:8080/INIpayStdSample 까지만 기입한다.-->
+
+</form>
+
+<button onclick="INIStdPay.pay('SendPayForm_id')" style="padding:10px; margin-left:10%">결제요청</button>
+
+</body>
+</html>
